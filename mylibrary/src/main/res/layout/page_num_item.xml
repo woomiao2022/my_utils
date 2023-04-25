@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    tools:ignore="MissingDefaultResource">
+
+<!--    内容-->
+    <TextView
+        android:id="@+id/pageNum_item_tv"
+        android:layout_width="wrap_content"
+        android:minWidth="40dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/line_border"
+        android:gravity="center"
+        android:text="111"
+        android:textColor="@color/text_color"
+        android:textSize="12sp"
+        android:visibility="gone" />
+
+<!--    省略-->
+    <TextView
+        android:id="@+id/pageNum_item_more"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="···"
+        android:textColor="@color/text_color"
+        android:textSize="14dp"
+        android:visibility="gone" />
+
+    <!--    文字类型的上一页按钮-->
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/pageNum_item_pre"
+        android:layout_width="wrap_content"
+        android:minWidth="40dp"
+        android:paddingHorizontal="5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/line_border"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/pageNum_item_pre_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pre"
+            android:textColor="@color/text_color"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!--    文字类型的下一页按钮-->
+    <LinearLayout
+        android:id="@+id/pageNum_item_next"
+        android:layout_width="wrap_content"
+        android:minWidth="40dp"
+        android:paddingHorizontal="5dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/line_border"
+        android:visibility="gone"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/pageNum_item_next_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="next"
+            android:textColor="@color/text_color"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+    <!--    图片类型的上一页按钮-->
+    <LinearLayout
+        android:id="@+id/pageNum_item_ImgPre"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/line_border"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/pageNum_item_pre_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_back_left_24" />
+    </LinearLayout>
+    <!--    图片类型的下一页按钮-->
+    <LinearLayout
+        android:id="@+id/pageNum_item_ImgNext"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/line_border"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/pageNum_item_next_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_back_right_24" />
+    </LinearLayout>
+
+</FrameLayout>

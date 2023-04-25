@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.woomiao.myutils.amountKeyboard.AmountEditText
+        android:id="@+id/keyboardEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textColorHint="@color/text_color"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:hint="请输入金额"/>
+
+    <LinearLayout
+        android:id="@+id/keyboardview_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="bottom"
+        android:visibility="gone"
+        android:padding="5dp"
+        android:elevation="10dp"
+        android:orientation="vertical">
+        <com.woomiao.myutils.amountKeyboard.AmountKeyboardView
+            android:id="@+id/keyboardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowRadius="0.0"
+            android:shadowColor="@color/grey_E1E1E1"
+            android:keyTextSize="16sp"
+            android:layout_gravity="center"
+            android:keyTextColor="@color/black"
+            android:keyBackground="@color/pink"
+            android:background="@color/black"/>
+        <ImageView
+            android:id="@+id/keyboardview_done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

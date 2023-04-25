@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="PageNumView">
+<!--        上一页、下一页按钮的样式-->
+        <attr name="buttonsType">
+<!--            图标显示-->
+            <enum name="image" value="0"/>
+            <!--            文字显示-->
+            <enum name="txt" value="1"/>
+        </attr>
+
+        <attr name="isShowTotalView" format="boolean" />
+        <attr name="selectedColor" format="color"></attr>
+        <attr name="preButtonText" format="string"/>
+        <attr name="nextButtonText" format="string"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="CustomSpinner">
+        <attr name="selected_txt_size" format="dimension" />
+        <attr name="content_txt_size" format="dimension" />
+        <attr name="backgroundResource" format="reference|color" />
+        <attr name="popupBackgroundResource" format="reference|color" />
+        <attr name="popupLocation">
+            <!--            底部-->
+            <enum name="bottom" value="0"/>
+            <!--            顶部-->
+            <enum name="top" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ScrollTableView">
+        <attr name="showDelBtn" format="boolean"/>
+        <attr name="showEditBtn" format="boolean"/>
+        <attr name="showDetailBtn" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="MultiLineEditText">
+        <attr name="showType">
+            <!--            多行輸入框显示-->
+            <enum name="edit" value="0"/>
+            <!--            文字显示-->
+            <enum name="txt" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>

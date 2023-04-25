@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="80dp"
+    tools:ignore="MissingDefaultResource">
+
+    <TextView
+        android:id="@+id/scrolltableview_item_content"
+        android:layout_width="200dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/text_color"
+        android:paddingVertical="5dp"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/scrolltableview_item_content_f"
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:background="@color/white"
+        android:paddingVertical="5dp"
+        android:layout_height="match_parent"/>
+
+
+    <LinearLayout
+        android:id="@+id/scrolltableview_item_btns"
+        android:layout_width="200dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:visibility="gone"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="編輯"
+            android:gravity="center"
+            android:paddingVertical="5dp"
+            android:textColor="@color/themeColor_700"
+            android:textSize="14sp"
+            android:id="@+id/scrolltableview_item_edit"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="刪除"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:paddingVertical="5dp"
+            android:id="@+id/scrolltableview_item_del"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="詳情"
+            android:gravity="center"
+            android:paddingVertical="5dp"
+            android:textColor="@color/themeColor_700"
+            android:textSize="14sp"
+            android:id="@+id/scrolltableview_item_detail"/>
+    </LinearLayout>
+
+</LinearLayout>

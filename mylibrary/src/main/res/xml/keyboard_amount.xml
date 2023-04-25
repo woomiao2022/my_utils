@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:keyWidth="25%p"
+    android:keyHeight="50dp"
+    android:verticalGap="1px"
+    android:horizontalGap="1px"
+    tools:ignore="MissingDefaultResource">
+
+<!--    https://blog.csdn.net/lwh1212/article/details/125499007-->
+    <Row>
+        <Key
+            android:codes="49"
+            android:keyLabel="1"/>
+        <Key
+            android:codes="50"
+            android:keyLabel="2" />
+        <Key
+            android:codes="51"
+            android:keyLabel="3" />
+    </Row>
+
+    <Row>
+        <Key
+            android:codes="52"
+            android:keyLabel="4" />
+        <Key
+            android:codes="53"
+            android:keyLabel="5" />
+        <Key
+            android:codes="54"
+            android:keyLabel="6" />
+    </Row>
+    <Row>
+        <Key android:keyLabel="7" android:codes="55"/>
+
+        <Key android:keyLabel="8" android:codes="56"/>
+
+        <Key android:keyLabel="9" android:codes="57"/>
+    </Row>
+    <Row>
+
+        <Key android:keyLabel="." android:codes="46"/>
+        <Key android:keyLabel="0" android:codes="48"/>
+        <Key
+            android:codes="-5"
+            android:keyIcon="@drawable/ic_baseline_backspace_24"
+            android:isRepeatable="true" />
+    </Row>
+
+
+</Keyboard>
