@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/app/src/main/res/drawable-v24/ic_baseline_keyboard_arrow_down_24.xml" value="0.225" />
+        <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/app/src/main/res/drawable/ic_baseline_account_balance_24.xml" value="0.225" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/app/src/main/res/layout/activity_test.xml" value="0.36614583333333334" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/app/src/main/res/layout/fragment_amount_keyboard.xml" value="0.36614583333333334" />
@@ -11,9 +12,12 @@
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/app/src/main/res/layout/fragment_other.xml" value="0.36614583333333334" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/app/src/main/res/layout/fragment_pagenum.xml" value="0.36614583333333334" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/app/src/main/res/layout/fragment_tableview.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/mylibrary/src/main/res/drawable/bg_toast.xml" value="0.225" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/mylibrary/src/main/res/drawable/line_border.xml" value="0.225" />
+        <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/mylibrary/src/main/res/drawable/shadow_radius_20dp.xml" value="0.225" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/mylibrary/src/main/res/layout/custom_item.xml" value="0.36614583333333334" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/mylibrary/src/main/res/layout/custom_spinner.xml" value="0.36614583333333334" />
+        <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/mylibrary/src/main/res/layout/layout_mytoast.xml" value="0.36614583333333334" />
         <entry key="..\:/Android_Studio/Workspace/WMTestDemo/lirary/WooUtils/mylibrary/src/main/res/layout/table_item.xml" value="0.36614583333333334" />
       </map>
     </option>

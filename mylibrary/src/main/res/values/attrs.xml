@@ -28,6 +28,8 @@
             <!--            顶部-->
             <enum name="top" value="1"/>
         </attr>
+        <attr name="paddingHorizontal" format="dimension" />
+        <attr name="paddingVertical" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="ScrollTableView">
@@ -42,6 +44,14 @@
             <enum name="edit" value="0"/>
             <!--            文字显示-->
             <enum name="txt" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" format="dimension" />
+        <attr name="type">
+            <enum name="circle" value="0" />
+            <enum name="round" value="1" />
         </attr>
     </declare-styleable>
 </resources>

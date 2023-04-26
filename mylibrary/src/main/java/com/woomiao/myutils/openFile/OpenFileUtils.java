@@ -13,6 +13,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * 打开文件
+ *
+ */
 public class OpenFileUtils {
 
     /**

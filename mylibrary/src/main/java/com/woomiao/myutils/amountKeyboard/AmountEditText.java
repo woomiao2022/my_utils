@@ -9,6 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 
+/**
+ *
+ * 自定义金额输入键盘
+ * https://blog.csdn.net/lwh1212/article/details/125499007
+ */
 public class AmountEditText extends AppCompatEditText {
     private AmountKeyboardView mAmountKeyboardView;
     public AmountEditText(@NonNull Context context) {

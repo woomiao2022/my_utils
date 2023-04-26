@@ -17,6 +17,10 @@ import com.woomiao.myutils.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 自定义页码
+ *
+ */
 public class PageNumView extends LinearLayout {
     public static String PAGE_FLAG_PRE = "left";//左箭头标志
     public static String PAGE_FLAG_NEXT = "right";//右箭头标志

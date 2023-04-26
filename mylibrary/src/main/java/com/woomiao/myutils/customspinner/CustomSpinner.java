@@ -23,6 +23,10 @@ import com.woomiao.myutils.utils.ScreenUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 自定义下拉列表
+ *
+ */
 public class CustomSpinner extends LinearLayout {
     private static final String TAG = "下拉列表";
     private TextView tv_selected;
@@ -64,6 +68,10 @@ public class CustomSpinner extends LinearLayout {
         int popupLocation = typedArray.getInt(R.styleable.CustomSpinner_popupLocation, -1);//弹窗显示位置，默认显示在底部
         popupBackgroundResource = typedArray.getDrawable(R.styleable.CustomSpinner_popupBackgroundResource);
         backgroundResource = typedArray.getDrawable(R.styleable.CustomSpinner_backgroundResource);
+        //设置内边距
+        int paddingHorizontal = typedArray.getDimensionPixelSize(R.styleable.CustomSpinner_paddingHorizontal, -1);
+        int paddingVertical = typedArray.getDimensionPixelSize(R.styleable.CustomSpinner_paddingVertical, -1);
+
         //设置选中字体大小
 //        Log.i(TAG, "选中字体大小: "+selectTxtSize+"  "+listTxtSize);
         tv_selected.getPaint().setTextSize(selectTxtSize);
@@ -71,6 +79,16 @@ public class CustomSpinner extends LinearLayout {
         //设置背景
         if (backgroundResource != null){
             spinner_layout.setBackgroundDrawable(backgroundResource);
+        }
+        //设置内边距
+        if (paddingHorizontal > 0 || paddingVertical > 0){
+            if (paddingHorizontal == -1){
+                paddingHorizontal = 10;
+            }
+            if (paddingVertical == -1){
+                paddingVertical = 5;
+            }
+            spinner_layout.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
         }
 
 

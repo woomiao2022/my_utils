@@ -4,12 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
     tools:ignore="MissingDefaultResource">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1、多行文本框：MultiLineEditText"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -32,11 +37,17 @@
             android:text="确定"
             android:backgroundTint="@color/themeColor_700"/>
 
+        <!--        内嵌ScrollView滑动冲突解决：NestedInScrollView-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2、内嵌ScrollView滑动冲突解决：NestedInScrollView"
+            android:layout_marginTop="10dp"/>
         <com.woomiao.myutils.NestedInScrollView
             android:layout_width="200dp"
             android:layout_marginVertical="10dp"
             android:background="@drawable/line_border"
-            android:layout_height="50dp">
+            android:layout_height="100dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -48,6 +59,77 @@
                     android:gravity="center"/>
             </LinearLayout>
         </com.woomiao.myutils.NestedInScrollView>
+
+        <!--        跑马灯-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3、跑马灯"
+            android:layout_marginTop="10dp"/>
+        <com.woomiao.myutils.MarqueTextView
+            android:id="@+id/marquetv"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--        RoundImageView显示圆形图片-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4、RoundImageView显示圆形图片"
+            android:layout_marginTop="10dp"/>
+        <com.woomiao.myutils.RoundImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:type="circle"
+            android:src="@mipmap/atm"/>
+
+<!--        RoundImageView显示圆角图片-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5、RoundImageView显示圆角图片"
+            android:layout_marginTop="10dp"/>
+        <com.woomiao.myutils.RoundImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:borderRadius="8dp"
+            android:src="@mipmap/atm"
+            app:type="round"/>
+
+        <!--        ImageView显示图片 centerCrop-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6、ImageView显示图片 centerCrop"
+            android:layout_marginTop="10dp"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/atm"/>
+
+        <!--        ImageView显示图片 默认-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7、ImageView显示图片 默认"
+            android:layout_marginTop="10dp"/>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/atm"/>
+
+        <!--        阴影效果-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8、drawable阴影背景"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="15dp"
+            android:background="@drawable/shadow_radius_20dp"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="match_parent"

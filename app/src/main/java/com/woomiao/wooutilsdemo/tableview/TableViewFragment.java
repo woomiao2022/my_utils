@@ -14,6 +14,8 @@ import com.woomiao.wooutilsdemo.databinding.FragmentTableviewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author Administrator
@@ -24,6 +26,7 @@ import java.util.List;
  */
 public class TableViewFragment extends Fragment {
     private FragmentTableviewBinding binding;
+    private boolean isShowNo = true;
 
     @Nullable
     @Override
@@ -35,10 +38,35 @@ public class TableViewFragment extends Fragment {
 
     private void initView() {
         List<UserBean> l = new ArrayList<>();
+        binding.btn.setOnClickListener(v -> {
+            if (isShowNo){
+                isShowNo = false;
+                initListView(null);
+            }else {
+                isShowNo = true;
+                binding.rv.changeState(false, "");
+                initListView(l);
+            }
+        });
+
+        binding.rv.changeState(true, "加载中...");
         for (int i = 0; i < 14; i++) {
             l.add(new UserBean("姓名"+i, "女", "12", "红红火火恍恍惚惚或fff"));
         }
-        initListView(l);
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initListView(l);
+                    }
+                });
+            }
+        }, 2000);
+
     }
     /**
      * 初始化列表视图
@@ -54,13 +82,10 @@ public class TableViewFragment extends Fragment {
         }
         //更新ui
         if (list == null || list.size() == 0){
-            binding.rv.setVisibility(View.GONE);
-            binding.noDataTv.setVisibility(View.VISIBLE);
-            binding.noDataTv.setText("no data");
+            binding.rv.changeState(true, "数据是空的");
             return;
         }else {
-            binding.rv.setVisibility(View.VISIBLE);
-            binding.noDataTv.setVisibility(View.GONE);
+            binding.rv.changeState(false, "");
         }
 
         /**
