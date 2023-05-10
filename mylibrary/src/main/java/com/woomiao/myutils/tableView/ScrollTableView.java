@@ -30,7 +30,8 @@ import java.util.List;
  * 描述：仿Excel样式的列表；
  *      第一列固定，可上下、左右滚动；
  *      一行的最后一个数据可显示为按钮（编辑、详情、删除按钮）；
- *      调用changeState()可以改变显示表格内容或no data文字
+ *      showTip()：显示提示内容，隐藏表格【如数据为空时，显示提示内容：“没有数据”】
+ *      showContent()：显示表格，隐藏提示
  * Email:
  */
 public class ScrollTableView extends LinearLayout {
@@ -55,9 +56,8 @@ public class ScrollTableView extends LinearLayout {
     public static final int FIRST_COLUMN_WIDTH_FIXED = 2;//第一列宽度设置后不随总宽度进行调整
     private int firstColumnWidthModel;
 
-    //TODO 加入no data 显示
     private LinearLayout content_layout;//表格最外层
-    private TextView no_data_tv;
+    private TextView tip_tv;//提示文本
 
     public ScrollTableView(Context context) {
         this(context, null, 0);
@@ -74,8 +74,7 @@ public class ScrollTableView extends LinearLayout {
     }
 
     private void init(@Nullable AttributeSet attrs) {
-        //TODO 加入no data 显示
-        //默认显示表格，nodata默认隐藏
+        //默认显示表格，提示文本默认隐藏
         this.setOrientation(VERTICAL);
         content_layout = new LinearLayout(mContext);
         content_layout.setOrientation(HORIZONTAL);
@@ -83,12 +82,7 @@ public class ScrollTableView extends LinearLayout {
         content_layout.addView(getRowHeader());
         content_layout.addView(getFirstColumnAndItemLayout());
         this.addView(content_layout);
-        this.addView(getNoDataView(false));
-
-        //TODO 加入no data 显示
-        /*this.setOrientation(HORIZONTAL);
-        this.addView(getRowHeader());//第一列
-        this.addView(getFirstColumnAndItemLayout());//第一行以及内容表*/
+        this.addView(getTipView(false));
 
         //第一行表头数据
         headerAdapter = new TableAdapter(mContext);
@@ -169,43 +163,30 @@ public class ScrollTableView extends LinearLayout {
         });
     }
 
-    //TODO 加入no data 显示
-    //获取NoData视图，默认隐藏
-    private TextView getNoDataView(boolean visibility){
-        if (no_data_tv == null){
-            no_data_tv = new TextView(mContext);
-            no_data_tv.setLayoutParams(new LayoutParams(-1,-1));
-            no_data_tv.setText("no data");
-            no_data_tv.setGravity(Gravity.CENTER);
-            no_data_tv.setTextColor(mContext.getResources().getColor(R.color.text_color));
+    //获取提示文本视图，默认隐藏
+    private TextView getTipView(boolean visibility){
+        if (tip_tv == null){
+            tip_tv = new TextView(mContext);
+            tip_tv.setLayoutParams(new LayoutParams(-1,-1));
+            tip_tv.setText("no data");
+            tip_tv.setGravity(Gravity.CENTER);
+            tip_tv.setTextColor(mContext.getResources().getColor(R.color.text_color));
         }
-        no_data_tv.setVisibility(visibility ? VISIBLE : GONE);
-        return no_data_tv;
+        tip_tv.setVisibility(visibility ? VISIBLE : GONE);
+        return tip_tv;
     }
 
-    /**
-     * 设置 NoData的文本内容
-     * @param str
-     */
-    public void setNoDataText(String str){
-        no_data_tv.setText(str);
+    //显示提示
+    public void showTip(String tip){
+        tip_tv.setVisibility(VISIBLE);
+        content_layout.setVisibility(GONE);
+        tip_tv.setText(tip);
     }
 
-    /**
-     * 状态改变
-     *
-     * @param isShowNoData 是否显示NoData视图
-     * @param noDataStr NoData的文本内容
-     */
-    public void changeState(boolean isShowNoData, String noDataStr){
-        if (isShowNoData){
-            no_data_tv.setVisibility(VISIBLE);
-            content_layout.setVisibility(GONE);
-            no_data_tv.setText(noDataStr);
-        }else {
-            no_data_tv.setVisibility(GONE);
-            content_layout.setVisibility(VISIBLE);
-        }
+    //显示内容
+    public void showContent(){
+        tip_tv.setVisibility(GONE);
+        content_layout.setVisibility(VISIBLE);
     }
 
     //获取第一列

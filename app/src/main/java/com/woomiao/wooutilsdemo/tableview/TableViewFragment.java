@@ -44,12 +44,12 @@ public class TableViewFragment extends Fragment {
                 initListView(null);
             }else {
                 isShowNo = true;
-                binding.rv.changeState(false, "");
+                binding.rv.showContent();
                 initListView(l);
             }
         });
 
-        binding.rv.changeState(true, "加载中...");
+        binding.rv.showTip("加载中...");
         for (int i = 0; i < 14; i++) {
             l.add(new UserBean("姓名"+i, "女", "12", "红红火火恍恍惚惚或fff"));
         }
@@ -82,10 +82,10 @@ public class TableViewFragment extends Fragment {
         }
         //更新ui
         if (list == null || list.size() == 0){
-            binding.rv.changeState(true, "数据是空的");
+            binding.rv.showTip("数据是空的");
             return;
         }else {
-            binding.rv.changeState(false, "");
+            binding.rv.showContent();
         }
 
         /**
