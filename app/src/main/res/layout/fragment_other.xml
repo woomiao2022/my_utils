@@ -130,11 +130,24 @@
             android:paddingVertical="15dp"
             android:background="@drawable/shadow_radius_20dp"
             android:layout_marginTop="10dp"/>
+        <!-- Android EditText金额输入-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9、Android EditText实现金额输入"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入金额"
+            android:inputType="numberDecimal"
+            android:id="@+id/et_amount"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="700dp"
             android:text="占据空间"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:background="@color/themeColor_700"/>
     </LinearLayout>

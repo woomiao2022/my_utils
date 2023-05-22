@@ -24,11 +24,20 @@ public class MoneyInputFilter implements InputFilter {
     //输入的最大金额
     private static final int MAX_VALUE = Integer.MAX_VALUE;
     //小数点后的位数
-    private static final int POINTER_LENGTH = 2;
+    private static int POINTER_LENGTH = 2;
     private static final String POINTER = ".";
     private static final String ZERO = "0";
 
     public MoneyInputFilter() {
+        mPattern = Pattern.compile("([0-9]|\\.)*");
+    }
+
+    /**
+     *
+     * @param pointerLength 小数点后的位数
+     */
+    public MoneyInputFilter(int pointerLength) {
+        POINTER_LENGTH = pointerLength;
         mPattern = Pattern.compile("([0-9]|\\.)*");
     }
 

@@ -1,6 +1,7 @@
 package com.woomiao.wooutilsdemo.other;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.woomiao.myutils.MyToast;
+import com.woomiao.myutils.amountInputEditText.MoneyInputFilter;
 import com.woomiao.wooutilsdemo.databinding.FragmentOtherBinding;
 
 /**
@@ -69,6 +71,10 @@ public class OtherFragment extends Fragment {
                 "———————————————— " +
                 "版权声明：本文为CSDN博主「生来如风」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。 " +
                 "原文链接：https://blog.csdn.net/qq_39438055/article/details/104414947");
+
+        //9、Android EditText实现金额输入
+        InputFilter[] filters = {new MoneyInputFilter()};
+        binding.etAmount.setFilters(filters);
     }
 
 
