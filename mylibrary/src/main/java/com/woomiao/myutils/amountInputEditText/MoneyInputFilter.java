@@ -14,8 +14,10 @@ import java.util.regex.Pattern;
  * 描述：过滤用户输入只能为金额格式
  * 链接: https://cloud.tencent.com/developer/article/1782232
  *
- * 使用：InputFilter[] filters = {new CashierInputFilter()};
- *      editText.setFilters(filters);
+ * 使用：1、xml中EditText设置属性：android:inputType="numberDecimal"
+ *      2、Java代码中使用当前的过滤器
+ *          InputFilter[] filters = {new CashierInputFilter()};
+ *          editText.setFilters(filters);
  */
 public class MoneyInputFilter implements InputFilter {
     Pattern mPattern;
