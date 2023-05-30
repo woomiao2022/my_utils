@@ -89,7 +89,9 @@ public class PageNumView extends LinearLayout {
             tv_total.setVisibility(GONE);
         } else {
             tv_total.setVisibility(VISIBLE);
-            tv_total.setTextColor(totalTvColor);
+            if (totalTvColor != -1){
+                tv_total.setTextColor(totalTvColor);
+            }
         }
         //上一页、下一页按钮文字 显示为文字样式时生效
         String preBtnT = typedArray.getString(R.styleable.PageNumView_preButtonText);

@@ -37,6 +37,10 @@
         <attr name="showDelBtn" format="boolean"/>
         <attr name="showEditBtn" format="boolean"/>
         <attr name="showDetailBtn" format="boolean"/>
+        <attr name="delBtnTvColor" format="color"/>
+        <attr name="editBtnTvColor" format="color"/>
+        <attr name="detailBtnTvColor" format="color"/>
+        <attr name="tipTvColor" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="MultiLineEditText">

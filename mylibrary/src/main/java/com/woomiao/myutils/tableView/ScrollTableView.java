@@ -103,9 +103,21 @@ public class ScrollTableView extends LinearLayout {
         boolean showEdit = typedArray.getBoolean(R.styleable.ScrollTableView_showEditBtn, false);
         boolean showDel = typedArray.getBoolean(R.styleable.ScrollTableView_showDelBtn, false);
         boolean showDetail = typedArray.getBoolean(R.styleable.ScrollTableView_showDetailBtn, false);
+
+        int editBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_editBtnTvColor, -1);
+        int delBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_delBtnTvColor, -1);
+        int detailBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_detailBtnTvColor, -1);
+
+        int tipTvColor = typedArray.getColor(R.styleable.ScrollTableView_tipTvColor, -1);
+        if (tipTvColor != -1){
+            tip_tv.setTextColor(tipTvColor);
+        }
+
         //第一列除外的總列數
-//        int column = typedArray.getInt(R.styleable.ScrollTableView_columnCountForExceptTheFirst, 4);
-        itemAdapter = new TableAdapter(mContext, showEdit, showDel, showDetail);
+        itemAdapter = new TableAdapter(
+                mContext,
+                showEdit, showDel, showDetail,
+                editBtnTvColor, delBtnTvColor, detailBtnTvColor);
         rvItems.setAdapter(itemAdapter);
         itemAdapter.setClick(new TableAdapter.Click() {
             @Override

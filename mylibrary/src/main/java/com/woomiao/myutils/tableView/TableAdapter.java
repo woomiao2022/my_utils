@@ -22,7 +22,7 @@ import java.util.List;
  * 描述：
  * Email:
  */
-public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder>{
+public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder> {
     private final Context mContext;
     private List<String> mItemList;
     private int itemWidth = 360;
@@ -33,6 +33,10 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
     private boolean showEdit, showDetail, shoDel;
     private int column = 4;//除去第一列以外，总共多少列
 
+    private int editBtnTvColor = -1;
+    private int delBtnTvColor = -1;
+    private int detailBtnTvColor = -1;
+
     public TableAdapter(Context context) {
         this.mContext = context;
         this.mItemList = new ArrayList<>();
@@ -41,12 +45,18 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
         this.showDetail = false;
     }
 
-    public TableAdapter(Context context, boolean showEdit, boolean shoDel, boolean showDetail) {
+    public TableAdapter(Context context, boolean showEdit, boolean shoDel, boolean showDetail,
+                        int editBtnTvColor,
+                        int delBtnTvColor,
+                        int detailBtnTvColor) {
         this.mContext = context;
         this.mItemList = new ArrayList<>();
         this.shoDel = shoDel;
         this.showEdit = showEdit;
         this.showDetail = showDetail;
+        this.editBtnTvColor = editBtnTvColor;
+        this.delBtnTvColor = delBtnTvColor;
+        this.detailBtnTvColor = detailBtnTvColor;
     }
 
     public void setItemWidth(int width) {
@@ -74,15 +84,14 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.itemView.getLayoutParams().width = itemWidth;//解決宽度断裂问题
-        if (ScrollTableView.END_ITEM_BTNS.equals(mItemList.get(position))){
+        if (ScrollTableView.END_ITEM_BTNS.equals(mItemList.get(position))) {
             //删除、详情、编辑按钮
             changeUiForBtns(holder, position);
-        }
-        else {
+        } else {
             //文字
-            if (isFirstColumn){
+            if (isFirstColumn) {
                 changeUiForFirstColumn(holder, position);
-            }else {
+            } else {
                 changeUiForContentOrHeader(holder, position);
             }
         }
@@ -90,13 +99,13 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
     }
 
     //显示编辑、详情、删除按钮的ui
-    private void changeUiForBtns(MyViewHolder holder, int position){
+    private void changeUiForBtns(MyViewHolder holder, int position) {
         holder.btns_l.getLayoutParams().width = itemWidth;
         holder.tv_content.setVisibility(View.GONE);
         holder.btns_l.setVisibility(View.VISIBLE);
         holder.tv_content_f.setVisibility(View.GONE);
         holder.edit_btn.setOnClickListener(v -> {
-            if (click != null){
+            if (click != null) {
                 click.onEdit(getRealPosition(position));
             }
         });
@@ -108,25 +117,36 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
             if (click != null)
                 click.onDel(getRealPosition(position));
         });
-        if (!shoDel){
+
+        if (editBtnTvColor != -1){
+            holder.edit_btn.setTextColor(editBtnTvColor);
+        }
+        if (delBtnTvColor != -1){
+            holder.del_btn.setTextColor(delBtnTvColor);
+        }
+        if (detailBtnTvColor != -1){
+            holder.detail_btn.setTextColor(detailBtnTvColor);
+        }
+
+        if (!shoDel) {
             holder.del_btn.setVisibility(View.GONE);
         }
-        if (!showDetail){
+        if (!showDetail) {
             holder.detail_btn.setVisibility(View.GONE);
         }
-        if (!showEdit){
+        if (!showEdit) {
             holder.edit_btn.setVisibility(View.GONE);
         }
         int real = getRealPosition(position);
-        if ((real & 1) == 1){
+        if ((real & 1) == 1) {
             holder.btns_l.setBackgroundColor(mContext.getResources().getColor(R.color.grey_f3f3));
-        }else {
+        } else {
             holder.btns_l.setBackgroundColor(mContext.getResources().getColor(R.color.white));
         }
     }
 
     //显示正文内容或表头的ui
-    private void changeUiForContentOrHeader(MyViewHolder holder, int position){
+    private void changeUiForContentOrHeader(MyViewHolder holder, int position) {
         holder.tv_content.getLayoutParams().width = itemWidth;
         holder.btns_l.setVisibility(View.GONE);
         holder.tv_content.setVisibility(View.VISIBLE);
@@ -134,13 +154,13 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
 
         String item = mItemList.get(position);
         holder.tv_content.setText(item);
-        if (isHeader){
+        if (isHeader) {
             holder.tv_content.setBackgroundColor(mContext.getResources().getColor(R.color.grey_f3f3));
-        }else {
+        } else {
             int real = getRealPosition(position);
-            if ((real & 1) == 1){
+            if ((real & 1) == 1) {
                 holder.tv_content.setBackgroundColor(mContext.getResources().getColor(R.color.grey_f3f3));
-            }else {
+            } else {
                 holder.tv_content.setBackgroundColor(mContext.getResources().getColor(R.color.white));
             }
         }
@@ -148,33 +168,34 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
 
     /**
      * 显示第一列的ui（不包括表头）
+     *
      * @param holder
      * @param position 此处下标就是真实列表的下标
      */
-    private void changeUiForFirstColumn(MyViewHolder holder, int position){
+    private void changeUiForFirstColumn(MyViewHolder holder, int position) {
         holder.tv_content_f.getLayoutParams().width = itemWidth;
         holder.btns_l.setVisibility(View.GONE);
         holder.tv_content.setVisibility(View.GONE);
         holder.tv_content_f.setVisibility(View.VISIBLE);
         holder.tv_content_f.setText(mItemList.get(position));
         holder.tv_content_f.setTextColor(textColor);
-        if ((position & 1) == 1){
+        if ((position & 1) == 1) {
             holder.tv_content_f.setBackgroundColor(mContext.getResources().getColor(R.color.grey_f3f3));
-        }else {
+        } else {
             holder.tv_content_f.setBackgroundColor(mContext.getResources().getColor(R.color.white));
         }
     }
 
     //获取内容所在的真实下标
-    public int getRealPosition(int position){
-        return position/column;
+    public int getRealPosition(int position) {
+        return position / column;
     }
 
-    public void setClick(Click click){
+    public void setClick(Click click) {
         this.click = click;
     }
 
-    public void setColumnCountForExceptTheFirst(int column){
+    public void setColumnCountForExceptTheFirst(int column) {
         this.column = column;
     }
 
@@ -196,6 +217,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
         private TextView tv_content, tv_content_f;
         private LinearLayout btns_l;
         private TextView edit_btn, detail_btn, del_btn;
+
         MyViewHolder(View itemView) {
             super(itemView);
             tv_content = itemView.findViewById(R.id.scrolltableview_item_content);
@@ -207,9 +229,11 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
         }
     }
 
-    public interface Click{
+    public interface Click {
         void onDel(int position);
+
         void onEdit(int position);
+
         void onDetail(int position);
     }
 }
