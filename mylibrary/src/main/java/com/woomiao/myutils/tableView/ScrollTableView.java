@@ -104,14 +104,12 @@ public class ScrollTableView extends LinearLayout {
         boolean showDel = typedArray.getBoolean(R.styleable.ScrollTableView_showDelBtn, false);
         boolean showDetail = typedArray.getBoolean(R.styleable.ScrollTableView_showDetailBtn, false);
 
-        int editBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_editBtnTvColor, -1);
-        int delBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_delBtnTvColor, -1);
-        int detailBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_detailBtnTvColor, -1);
+        int editBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_editBtnTvColor, mContext.getResources().getColor(R.color.themeColor_700));
+        int delBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_delBtnTvColor, mContext.getResources().getColor(R.color.red));
+        int detailBtnTvColor = typedArray.getColor(R.styleable.ScrollTableView_detailBtnTvColor, mContext.getResources().getColor(R.color.themeColor_700));
 
-        int tipTvColor = typedArray.getColor(R.styleable.ScrollTableView_tipTvColor, -1);
-        if (tipTvColor != -1){
-            tip_tv.setTextColor(tipTvColor);
-        }
+        int tipTvColor = typedArray.getColor(R.styleable.ScrollTableView_tipTvColor, mContext.getResources().getColor(R.color.text_color));
+        tip_tv.setTextColor(tipTvColor);
 
         //第一列除外的總列數
         itemAdapter = new TableAdapter(

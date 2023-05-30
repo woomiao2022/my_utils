@@ -118,13 +118,13 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MyViewHolder
                 click.onDel(getRealPosition(position));
         });
 
-        if (editBtnTvColor != -1){
+        if (editBtnTvColor != mContext.getResources().getColor(R.color.themeColor_700)){
             holder.edit_btn.setTextColor(editBtnTvColor);
         }
-        if (delBtnTvColor != -1){
+        if (delBtnTvColor != mContext.getResources().getColor(R.color.red)){
             holder.del_btn.setTextColor(delBtnTvColor);
         }
-        if (detailBtnTvColor != -1){
+        if (detailBtnTvColor != mContext.getResources().getColor(R.color.themeColor_700)){
             holder.detail_btn.setTextColor(detailBtnTvColor);
         }
 

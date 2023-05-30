@@ -216,7 +216,7 @@ public class PageNumAdapter extends RecyclerView.Adapter<PageNumAdapter.VH> {
             holder.tv.setTextColor(context.getResources().getColor(R.color.grey));
             if (position == PageNumView.cPagePosition) {
                 //选中页
-                holder.tv.setBackgroundColor(selectColor == -1 ? context.getResources().getColor(R.color.red) : selectColor);
+                holder.tv.setBackgroundColor(selectColor);
                 holder.tv.setTextColor(Color.WHITE);
             } else {
                 //未选中页
