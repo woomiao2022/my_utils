@@ -79,13 +79,18 @@ public class PageNumView extends LinearLayout {
         if (index < 0){
             index = 0;
         }
-        //选中时的背景颜色
+        //页码选中时的背景颜色
         int selectColor = typedArray.getColor(R.styleable.PageNumView_selectedColor, -1);
+        //总页数文字颜色
+        int totalTvColor = typedArray.getColor(R.styleable.PageNumView_totalTvColor, -1);
         //是否显示总页数视图
         boolean isShowTotalView = typedArray.getBoolean(R.styleable.PageNumView_isShowTotalView, true);
         if (!isShowTotalView) {
             tv_total.setVisibility(GONE);
-        } else tv_total.setVisibility(VISIBLE);
+        } else {
+            tv_total.setVisibility(VISIBLE);
+            tv_total.setTextColor(totalTvColor);
+        }
         //上一页、下一页按钮文字 显示为文字样式时生效
         String preBtnT = typedArray.getString(R.styleable.PageNumView_preButtonText);
         String nextBtnT = typedArray.getString(R.styleable.PageNumView_nextButtonText);

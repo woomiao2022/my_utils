@@ -11,7 +11,8 @@
         </attr>
 
         <attr name="isShowTotalView" format="boolean" />
-        <attr name="selectedColor" format="color"></attr>
+        <attr name="selectedColor" format="color"/>
+        <attr name="totalTvColor" format="color"/>
         <attr name="preButtonText" format="string"/>
         <attr name="nextButtonText" format="string"/>
     </declare-styleable>
