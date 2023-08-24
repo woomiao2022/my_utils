@@ -122,8 +122,10 @@ public class CustomSpinner extends LinearLayout {
     //设置下拉列表的列表内容
     public void setEntries(List<String> entries) {
         this.entries = entries;
-        tv_selected.setText(entries.get(0));
-        adapter.update(entries);
+        if (entries != null && entries.size() > 0){
+            tv_selected.setText(entries.get(0));
+            adapter.update(entries);
+        }
     }
 
     /**
@@ -132,7 +134,9 @@ public class CustomSpinner extends LinearLayout {
      * @param position 选中项下标
      */
     public void setSelected(int position) {
-        tv_selected.setText(entries.get(position));
+        if (position >= 0 && position < entries.size()){
+            tv_selected.setText(entries.get(position));
+        }
     }
 
     //设置下拉列表选中监听

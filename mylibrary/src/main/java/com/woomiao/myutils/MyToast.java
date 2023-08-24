@@ -16,10 +16,14 @@ import java.util.TimerTask;
  *
  */
 public class MyToast extends Toast {
-    private Context mContext;
     private Toast toast;
     public static MyToast myToast;
     private View toastView;
+
+    public static MyToast getInstance(Context context) {
+        myToast = new MyToast(context);
+        return myToast;
+    }
 
     /**
      * Construct an empty Toast object.  You must call {@link #setView} before you
@@ -30,19 +34,11 @@ public class MyToast extends Toast {
      */
     public MyToast(Context context) {
         super(context);
-        this.mContext = context;
         toastView = LayoutInflater.from(context).inflate(R.layout.layout_mytoast, null);
 
         if (null == toast) {
             toast = new Toast(context);
         }
-    }
-
-    public static MyToast getInstance(Context context) {
-//        if (null == lsToast) {
-        myToast = new MyToast(context);
-//        }
-        return myToast;
     }
 
 
@@ -56,19 +52,6 @@ public class MyToast extends Toast {
         TextView textView = toastView.findViewById(R.id.tv_ls_toast);
         textView.setText(str);
         toast.setView(toastView);
-        final Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                toast.show();
-            }
-        }, 0, 10*1000);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                toast.cancel();
-                timer.cancel();
-            }
-        }, 10*1000 );
+        toast.show();
     }
 }
