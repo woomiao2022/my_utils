@@ -377,8 +377,10 @@ public class ScrollTableView extends LinearLayout {
         fistColumnAdapter.setItemList(firstColumnList);
         itemAdapter.setItemList(itemList);
 
-        rvFirstColumn.scrollBy(mdx, mdy);
-        rvItems.scrollBy(mdx, mdy);
+        //这两句代码会导致第一列位置和内容列位置错开，
+        //原因：这两句代码先执行，然后包裹内容列的 HorizontalScrollView 会在页面刷新后重新回到起点，导致内容行位置和第一列位置不一样
+//        rvFirstColumn.scrollBy(mdx, mdy);
+//        rvItems.scrollBy(mdx, mdy);
 
         List<String> fist = new ArrayList<>(firstColumnList);
         fist.add(tvFirstHeader.getContentTxt());
