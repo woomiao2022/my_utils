@@ -50,7 +50,7 @@ public class ScrollTableView extends LinearLayout {
     private int firstColumnWidth = 50;
     //其他列宽度
     private int otherColumnWidth = 200;
-    private int layoutWidth;//列表總寬度，默認為屏幕寬度
+    private float layoutWidth;//列表總寬度，默認為屏幕寬度
 
     public static final int FIRST_COLUMN_WIDTH_AUTO = 1;//第一列寬度設置后還是會根據縂寬度進行調整
     public static final int FIRST_COLUMN_WIDTH_FIXED = 2;//第一列宽度设置后不随总宽度进行调整
@@ -273,7 +273,7 @@ public class ScrollTableView extends LinearLayout {
         for (String s : list) {
             width = (int) Math.max(width, paint.measureText(s));
         }
-        return dip2px(mContext, width) + 60;
+        return ScreenUtil.dip2px(mContext, width) + 60;
     }
 
     public int getItemCount() {
@@ -312,11 +312,11 @@ public class ScrollTableView extends LinearLayout {
      *         需在 setRowData() 之前调用
      * @param w
      */
-    public ScrollTableView setLayoutWidth(int w){
+    public ScrollTableView setLayoutWidth(float w){
         if (w > 0){
             layoutWidth = w;
         }else {
-            layoutWidth = ScreenUtil.getScreenWidth(mContext);
+            layoutWidth = ScreenUtil.getScreenWidthDp(mContext);
         }
         return this;
     }
@@ -363,6 +363,16 @@ public class ScrollTableView extends LinearLayout {
         addRowData(rowDataList);
     }
 
+    //將第一列和其他列定位到頂部位置，暫時用於處理第一列和其他列錯位的問題
+    public void updateUi() {
+        if (rvFirstColumn != null){
+            rvFirstColumn.scrollToPosition(0);
+        }
+        if (rvItems != null){
+            rvItems.scrollToPosition(0);
+        }
+    }
+
     private void addRowData(List<List<String>> rowDataList) {
         List<List<String>> list = new ArrayList<>(rowDataList);
         for (List<String> rowData : list) {
@@ -389,7 +399,7 @@ public class ScrollTableView extends LinearLayout {
         int firstW = firstColumnWidth;
         int otherW = otherColumnWidth;
         if (layoutWidth <= 0){
-            layoutWidth = ScreenUtil.getScreenWidth(mContext);
+            layoutWidth = ScreenUtil.getScreenWidthDp(mContext);
         }
 
 //        Log.i("我的测试", "始: " + firstW + "  " + otherW+"  屏幕总宽度："+layoutWidth);
@@ -398,7 +408,7 @@ public class ScrollTableView extends LinearLayout {
 
         if (sum < layoutWidth) {
             //如果ScrollTableView小于屏幕宽度，则按比例设置宽度，宽度占满屏幕
-            int sw = dip2px(mContext, layoutWidth);
+            int sw = ScreenUtil.dip2px(mContext, layoutWidth);
 //            Log.i("我的测试", "屏幕总宽度："+sw+"  实际总宽度："+sum);
             firstW = handleFirstWidth(sw, sum);
             otherW = handleOtherWidth(sw);
@@ -433,10 +443,5 @@ public class ScrollTableView extends LinearLayout {
      */
     private int handleOtherWidth(int sw){
         return (sw - firstColumnWidth) / headerAdapter.getItemCount();
-    }
-
-    public static int dip2px(Context context, float dpValue) {
-        final float scale = context.getApplicationContext().getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
     }
 }

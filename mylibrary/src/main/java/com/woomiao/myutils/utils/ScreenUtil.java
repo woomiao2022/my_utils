@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -47,27 +48,51 @@ public class ScreenUtil {
         return sPoint.y;
     }
 
-    public static final int SA_NORMAL = 0;//标准
-    public static final int SA_MIN1 = 1;//较小
-    public static final int SA_MIN2 = 2;//最小
-    public static int sAdapterType = -1;//屏幕适配等级
-    public static void screenAdapter(Activity activity){
-        if (sAdapterType != -1)
-            return;
-        //寬度：2000 标准
-        //寬度：1920 销售单据查询页面，顶部有些挤着，可把按钮方至第二行
-        //寬度：1600 销售单据查询页面，顶部有些挤着，可把按钮方至第二行
-        //寬度：1280 同上、会员管理顶部可隐藏电话和地址、选择数据弹窗顶部可将尾部空格部分缩短、销售退货顶部可将尾部空格部分缩短、销售出库顶部可将尾部空格部分缩短
-        //寬度：960 同上、
-        Point point = new Point();
-        getDispaly(activity).getRealSize(point);
-        int w = point.x;
-        if (w <= 1280){
-            sAdapterType = SA_MIN2;
-        }else if (w <= 1600){
-            sAdapterType = SA_MIN1;
-        }else {
-            sAdapterType = SA_NORMAL;
-        }
+
+
+    private static int screenWidthPx; //屏幕宽 px
+    private static int screenhightPx; //屏幕高 px
+    private static float density;//屏幕密度
+    private static int densityDPI;//屏幕密度
+    private static float screenWidthDip;//  dp单位
+    private static float screenHightDip;//  dp单位
+    public static int getScreenWidthPx(Context context){
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        density = dm.density;
+        densityDPI = dm.densityDpi;
+        screenWidthPx = dm.widthPixels;
+        screenhightPx = dm.heightPixels;
+        screenWidthDip = px2dip(context, dm.widthPixels);
+        screenHightDip = px2dip(context, dm.heightPixels);
+        return screenWidthPx;
+    }
+
+    public static float getScreenWidthDp(Context context){
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        density = dm.density;
+        densityDPI = dm.densityDpi;
+        screenWidthPx = dm.widthPixels;
+        screenhightPx = dm.heightPixels;
+        screenWidthDip = px2dip(context, dm.widthPixels);
+        screenHightDip = px2dip(context, dm.heightPixels);
+        return screenWidthDip;
+    }
+
+
+
+    /**
+     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
+     */
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
+     */
+    public static int px2dip(Context context, float pxValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (pxValue / scale + 0.5f);
     }
 }
