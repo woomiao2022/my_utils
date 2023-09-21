@@ -1,6 +1,7 @@
 package com.woomiao.wooutilsdemo.tableview;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.woomiao.myutils.tableView.ScrollTableView;
+import com.woomiao.myutils.utils.ScreenUtil;
 import com.woomiao.wooutilsdemo.databinding.FragmentTableviewBinding;
 
 import java.util.ArrayList;
@@ -128,10 +130,11 @@ public class TableViewFragment extends Fragment {
             l.add(ScrollTableView.END_ITEM_BTNS);
             rowList.add(l);
         }
-        binding.rv.setFirstColumnWidth(50)
-                .setFirstColumnWidthModel(ScrollTableView.FIRST_COLUMN_WIDTH_AUTO)
-                .setOtherColumnWidth(100)
-                .setLayoutWidth(0)//传入0，表示表格屏幕总宽度为设备屏幕宽度
+        float s = ScreenUtil.getScreenWidthDp(getContext()) * 0.8f;
+        Log.i("我的測試", "initListView: "+s);
+        binding.rv.setFirstColumnWidth(100)
+                .setLayoutWidth(s)
+                .setOtherColumnWidth(0)
                 .show(rowList);
     }
 

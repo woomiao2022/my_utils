@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -47,14 +48,10 @@ public class ScrollTableView extends LinearLayout {
     private IScrollTableView iScrollTableView;
     public static final String END_ITEM_BTNS = "end_item_btns";
     //第一列宽度
-    private int firstColumnWidth = 50;
-    //其他列宽度
-    private int otherColumnWidth = 200;
-    private float layoutWidth;//列表總寬度，默認為屏幕寬度
-
-    public static final int FIRST_COLUMN_WIDTH_AUTO = 1;//第一列寬度設置后還是會根據縂寬度進行調整
-    public static final int FIRST_COLUMN_WIDTH_FIXED = 2;//第一列宽度设置后不随总宽度进行调整
-    private int firstColumnWidthModel;
+    private int firstColumnWidth = 50;//單位dp
+    //其他列宽度 第一列宽度设置后不随总宽度进行调整，若总宽度小于可用宽度，则其他列共享剩余空间，若总宽度大于或等于可用宽度，则其他列宽不变
+    private int otherColumnWidth;//單位dp
+    private float layoutWidth;//列表總寬度，默認為屏幕寬度 單位dp
 
     private LinearLayout content_layout;//表格最外层
     private TextView tip_tv;//提示文本
@@ -321,18 +318,6 @@ public class ScrollTableView extends LinearLayout {
         return this;
     }
 
-    /**
-     * 设置第一列宽度模式
-     *         需在 setRowData() 之前调用
-     * @param model
-     *      FIRST_COLUMN_WIDTH_AUTO 第一列寬度設置后還是會根據縂寬度進行調整
-     *      FIRST_COLUMN_WIDTH_FIXED 第一列宽度设置后不随总宽度进行调整
-     */
-    public ScrollTableView setFirstColumnWidthModel(int model){
-        firstColumnWidthModel = model;
-        return this;
-    }
-
     //设置第一列宽度
     public ScrollTableView setFirstColumnWidth(int w){
         if (w > 0) {
@@ -343,7 +328,7 @@ public class ScrollTableView extends LinearLayout {
 
     //设置其他列宽度
     public ScrollTableView setOtherColumnWidth(int w){
-        if (w > 0){
+        if (w >= 0){
             otherColumnWidth = w;
         }
         return this;
@@ -395,53 +380,38 @@ public class ScrollTableView extends LinearLayout {
         List<String> fist = new ArrayList<>(firstColumnList);
         fist.add(tvFirstHeader.getContentTxt());
 
-        //----宽度设置----
-        int firstW = firstColumnWidth;
-        int otherW = otherColumnWidth;
+        //----宽度设置---- 單位dp
+        float firstW = firstColumnWidth;
+        float otherW = otherColumnWidth;
         if (layoutWidth <= 0){
             layoutWidth = ScreenUtil.getScreenWidthDp(mContext);
         }
 
-//        Log.i("我的测试", "始: " + firstW + "  " + otherW+"  屏幕总宽度："+layoutWidth);
+//        Log.i("我的测试", "始: " + firstW + "  " + otherW+"  屏幕总宽度："+layoutWidth+"  其他列數量："+headerAdapter.getItemCount());
+//        Log.i("我的測試", "-------: "+ScreenUtil.getScreenWidthDp(mContext)+"  "+ScreenUtil.getScreenWidthPx(mContext));
         //实际总宽度
-        int sum = otherW * headerAdapter.getItemCount() + firstW;
+        float sum = otherW * headerAdapter.getItemCount() + firstW;
 
         if (sum < layoutWidth) {
             //如果ScrollTableView小于屏幕宽度，则按比例设置宽度，宽度占满屏幕
-            int sw = ScreenUtil.dip2px(mContext, layoutWidth);
-//            Log.i("我的测试", "屏幕总宽度："+sw+"  实际总宽度："+sum);
-            firstW = handleFirstWidth(sw, sum);
-            otherW = handleOtherWidth(sw);
+//            Log.i("我的测试", "屏幕总宽度："+layoutWidth+"  实际总宽度："+sum);
+            firstW = firstColumnWidth;
+            otherW = handleOtherWidth();
         }
 
 //        Log.i("我的测试", "終: " + firstW + "  " + otherW);
-        tvFirstHeader.setContentTxtWidth(firstW);
-        fistColumnAdapter.setItemWidth(firstW);
-        headerAdapter.setItemWidth(otherW);
-        itemAdapter.setItemWidth(otherW);
-    }
-
-    /**
-     * 处理第一列宽度
-     * @param sw 屏幕空间宽度
-     * @param sum 所有列宽之和
-     * @return
-     */
-    private int handleFirstWidth(int sw, int sum){
-        if (firstColumnWidthModel == FIRST_COLUMN_WIDTH_AUTO){
-            return (int) (firstColumnWidth * 1.0f / sum * sw);
-        }
-        else if (firstColumnWidthModel == FIRST_COLUMN_WIDTH_FIXED){
-            return firstColumnWidth;
-        }
-        return firstColumnWidth;
+//        Log.i("我的测试", "終: " + ScreenUtil.dip2px(mContext, firstW) + "  " + ScreenUtil.dip2px(mContext, otherW));
+        tvFirstHeader.setContentTxtWidth(ScreenUtil.dip2px(mContext, firstW));
+        fistColumnAdapter.setItemWidth(ScreenUtil.dip2px(mContext, firstW));
+        headerAdapter.setItemWidth(ScreenUtil.dip2px(mContext, otherW));
+        itemAdapter.setItemWidth(ScreenUtil.dip2px(mContext, otherW));
     }
 
     /**
      * 处理其他列宽度
      * @return
      */
-    private int handleOtherWidth(int sw){
-        return (sw - firstColumnWidth) / headerAdapter.getItemCount();
+    private float handleOtherWidth(){
+        return (layoutWidth - firstColumnWidth) / headerAdapter.getItemCount();
     }
 }
