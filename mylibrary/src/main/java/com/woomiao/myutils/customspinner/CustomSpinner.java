@@ -139,6 +139,11 @@ public class CustomSpinner extends LinearLayout {
         }
     }
 
+    //获取当前选中内容
+    public String getSelected(){
+        return tv_selected.getText().toString();
+    }
+
     //设置下拉列表选中监听
     public void setSelectListener(ICustomSpinner iCustomSpinner) {
         this.iCustomSpinner = iCustomSpinner;

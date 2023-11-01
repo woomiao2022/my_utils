@@ -76,6 +76,11 @@ public class AmountKeyboardView extends KeyboardView implements KeyboardView.OnK
     public void onKey(int primaryCode, int[] keyCodes) {
         Editable editable = mEditText.getText();
         int start = mEditText.getSelectionStart();
+        //修复使用代码设置金额时无法删除问题，使用代码设置金额后，start获取到的值是0，但实际有金额
+        int s = mEditText.getText().toString().length();
+        if (start == 0 && s > 0){
+            start = s;
+        }
 
         //删除
         if (primaryCode == Keyboard.KEYCODE_DELETE){
