@@ -28,10 +28,12 @@ public class PageNumAdapter extends RecyclerView.Adapter<PageNumAdapter.VH> {
     private int selectColor = -1;
     private String preBtnTxt = "pre";
     private String nextBtnTxt = "next";
+    private int cPagePosition;//当前页码的下标 默认指向页码1的下标
 
-    public PageNumAdapter(Context context, List<String> list) {
+    public PageNumAdapter(Context context, List<String> list, int cPagePosition) {
         this.context = context;
         this.list = list;
+        this.cPagePosition = cPagePosition;
         buttonType = PageNumView.ButtonType.TXT;
     }
 
@@ -83,7 +85,7 @@ public class PageNumAdapter extends RecyclerView.Adapter<PageNumAdapter.VH> {
 
 
         //上一页按钮变化
-        if (PageNumView.cPagePosition == 1) {
+        if (cPagePosition == 1) {
             //上一页按钮不能使用
             if (buttonType == PageNumView.ButtonType.IMAGE) {
                 holder.pre_img.setImageResource(R.drawable.ic_back_left_24);
@@ -102,7 +104,7 @@ public class PageNumAdapter extends RecyclerView.Adapter<PageNumAdapter.VH> {
         }
 
         //下一页按钮变化
-        if (PageNumView.cPagePosition == list.size() - 2) {
+        if (cPagePosition == list.size() - 2) {
             //下一页按钮不能使用
             if (buttonType == PageNumView.ButtonType.IMAGE) {
                 holder.next_img.setImageResource(R.drawable.ic_back_right_24);
@@ -214,7 +216,7 @@ public class PageNumAdapter extends RecyclerView.Adapter<PageNumAdapter.VH> {
             holder.tv.setVisibility(View.VISIBLE);
             holder.more.setVisibility(View.GONE);
             holder.tv.setTextColor(context.getResources().getColor(R.color.grey));
-            if (position == PageNumView.cPagePosition) {
+            if (position == cPagePosition) {
                 //选中页
                 holder.tv.setBackgroundColor(selectColor);
                 holder.tv.setTextColor(Color.WHITE);
@@ -241,6 +243,10 @@ public class PageNumAdapter extends RecyclerView.Adapter<PageNumAdapter.VH> {
     public void update(List<String> list) {
         this.list = list;
         notifyDataSetChanged();
+    }
+
+    public void setcPagePosition(int cPagePosition){
+        this.cPagePosition = cPagePosition;
     }
 
     @Override

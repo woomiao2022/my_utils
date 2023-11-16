@@ -22,8 +22,8 @@ import java.util.List;
  *
  */
 public class PageNumView extends LinearLayout {
-    public static String PAGE_FLAG_PRE = "left";//左箭头标志
-    public static String PAGE_FLAG_NEXT = "right";//右箭头标志
+    public static final String PAGE_FLAG_PRE = "left";//左箭头标志
+    public static final String PAGE_FLAG_NEXT = "right";//右箭头标志
     private RecyclerView recyclerView;
     private TextView tv_total;
     private PageNumAdapter adapter;
@@ -48,7 +48,7 @@ public class PageNumView extends LinearLayout {
     private int size;//列表总数
     private int pageNum;//一页显示的数量
 
-    public static int cPagePosition = 1;//当前页码的下标 默认指向页码1的下标
+    private int cPagePosition = 1;//当前页码的下标 默认指向页码1的下标
     private List<String> list = new ArrayList<>();
 
     private IPageNumView iPageNumView;
@@ -101,7 +101,7 @@ public class PageNumView extends LinearLayout {
         list.add(PAGE_FLAG_NEXT);
 
         //初始化视图
-        adapter = new PageNumAdapter(context, list);
+        adapter = new PageNumAdapter(context, list, cPagePosition);
         adapter.setButtonType(sButtonTypeArray[index]);
         adapter.setSelectColor(selectColor);
         adapter.setPreButtonText(preBtnT);
@@ -134,7 +134,10 @@ public class PageNumView extends LinearLayout {
     public void setPageIndex(int pageIndex) {
         if (pageIndex == cPagePosition) return;
         cPagePosition = pageIndex;
-        adapter.notifyDataSetChanged();
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+            adapter.notifyDataSetChanged();
+        }
     }
     /**
      * 指定選中頁 不更新ui
@@ -142,6 +145,9 @@ public class PageNumView extends LinearLayout {
      */
     public void setPage(int cPage){
         cPagePosition = cPage;
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+        }
     }
 
     /**
@@ -155,7 +161,10 @@ public class PageNumView extends LinearLayout {
         list.add(PAGE_FLAG_NEXT);
         //重置后ui定位到第一页
         cPagePosition = 1;
-        adapter.update(list);
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+            adapter.update(list);
+        }
     }
 
     /**
@@ -303,7 +312,10 @@ public class PageNumView extends LinearLayout {
             }
         }
 
-        adapter.update(list);
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+            adapter.update(list);
+        }
 
         if (iPageNumView != null) {
             iPageNumView.onJump(pageNum);
@@ -426,12 +438,17 @@ public class PageNumView extends LinearLayout {
                 cPagePosition--;
             }
         }
-        adapter.update(list);
+
+
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+            adapter.update(list);
+        }
 
         if (iPageNumView != null) {
             iPageNumView.onJump(newPageNum);
         }
-        Log.i("PageNumView", "pre: " + cPagePosition + "-----" + list.get(cPagePosition));
+//        Log.i("PageNumView", "pre: " + cPagePosition + "-----" + list.get(cPagePosition));
     }
 
     private void next() {
@@ -503,12 +520,16 @@ public class PageNumView extends LinearLayout {
                 }
             }
         }
-        adapter.update(list);
+
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+            adapter.update(list);
+        }
 
         if (iPageNumView != null) {
             iPageNumView.onJump(newPageNum);
         }
-        Log.i("PageNumView", "next:  当前页下标" + cPagePosition + "  当前页码" + list.get(cPagePosition));
+//        Log.i("PageNumView", "next:  当前页下标" + cPagePosition + "  当前页码" + list.get(cPagePosition));
     }
 
     /**
@@ -524,6 +545,10 @@ public class PageNumView extends LinearLayout {
         }
         list.add(PageNumView.PAGE_FLAG_NEXT);
         cPagePosition = cPage;
+
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+        }
     }
 
     /**
@@ -560,6 +585,10 @@ public class PageNumView extends LinearLayout {
             cPagePosition = cPage;
         }
         list.add(PageNumView.PAGE_FLAG_NEXT);
+
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+        }
     }
 
     /**
@@ -585,6 +614,11 @@ public class PageNumView extends LinearLayout {
         list.add("...");
         list.add(totalPage + "");
         list.add(PageNumView.PAGE_FLAG_NEXT);
+
+
+        if (adapter != null){
+            adapter.setcPagePosition(cPagePosition);
+        }
     }
 
     public enum ButtonType {
